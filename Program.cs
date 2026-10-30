@@ -6,24 +6,16 @@ class Program
     //                long   KB     MB     GB. 
     private static void Main()
     {
-        string srcDir;
-        string outDir;
-        int count = 0;
-        do {
-            srcDir = Console.ReadLine() ?? "";
-            outDir = Console.ReadLine() ?? "";
-            try {
-                Directory.CreateDirectory(outDir);
-            } catch {
-                count++;
-                continue;
-            };
-            if (count == 3) {
-                Console.WriteLine("One of your paths wasn't valid.");
-                Environment.Exit(1);
-            }
-        } while (!Directory.Exists(srcDir));
-         
+        Console.WriteLine("Enter the source directory:");
+        string srcDir = Console.ReadLine() ?? "";
+        string outDir = Path.Combine(srcDir, "zips");
+        if (!Directory.Exists(srcDir))
+        {
+            Console.WriteLine("Source directory doesn't exist.");
+            Environment.Exit(1);
+        }
+        Directory.CreateDirectory(outDir);
+
         // 1. Plan batches by uncompressed size
         string[] files = Directory.GetFiles(srcDir);
         List<List<string>> batches = [];
