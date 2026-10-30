@@ -1,0 +1,14 @@
+C:\Users\wblake2\Documents\.mycode\CSharp\Compressor\bin\Debug\net10.0\Compressor.exe
+C:\Users\wblake2\Documents\.mycode\CSharp\Compressor\bin\Debug\net10.0\Compressor.deps.json
+C:\Users\wblake2\Documents\.mycode\CSharp\Compressor\bin\Debug\net10.0\Compressor.runtimeconfig.json
+C:\Users\wblake2\Documents\.mycode\CSharp\Compressor\bin\Debug\net10.0\Compressor.dll
+C:\Users\wblake2\Documents\.mycode\CSharp\Compressor\bin\Debug\net10.0\Compressor.pdb
+C:\Users\wblake2\Documents\.mycode\CSharp\Compressor\obj\Debug\net10.0\Compressor.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\wblake2\Documents\.mycode\CSharp\Compressor\obj\Debug\net10.0\Compressor.AssemblyInfoInputs.cache
+C:\Users\wblake2\Documents\.mycode\CSharp\Compressor\obj\Debug\net10.0\Compressor.AssemblyInfo.cs
+C:\Users\wblake2\Documents\.mycode\CSharp\Compressor\obj\Debug\net10.0\Compressor.csproj.CoreCompileInputs.cache
+C:\Users\wblake2\Documents\.mycode\CSharp\Compressor\obj\Debug\net10.0\Compressor.dll
+C:\Users\wblake2\Documents\.mycode\CSharp\Compressor\obj\Debug\net10.0\refint\Compressor.dll
+C:\Users\wblake2\Documents\.mycode\CSharp\Compressor\obj\Debug\net10.0\Compressor.pdb
+C:\Users\wblake2\Documents\.mycode\CSharp\Compressor\obj\Debug\net10.0\Compressor.genruntimeconfig.cache
+C:\Users\wblake2\Documents\.mycode\CSharp\Compressor\obj\Debug\net10.0\ref\Compressor.dll
