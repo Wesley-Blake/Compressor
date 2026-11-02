@@ -33,13 +33,16 @@ class Program
             }
             currentBatch.Add(path);
             current += size;
+            Console.WriteLine($"Adding {path} ({size / 1024 / 1024} MB) to batch {batches.Count + 1}, current batch size: {current / 1024 / 1024} MB");
         }
         // Add the left over.
         if (currentBatch.Count > 0) batches.Add(currentBatch);
+        Console.WriteLine($"Planned {batches.Count} batches.");
          
         // 2. Build the zips in parallel
         var options = new ParallelOptions { MaxDegreeOfParallelism = Environment.ProcessorCount };// lower this for a hard drive
          
+        Console.WriteLine($"Creating zips in {outDir}...");
         Parallel.For(0, batches.Count, options, i =>
         {
             string zipPath = Path.Combine(outDir, $"May2026_{i + 1}.zip"); // Name of file.
@@ -57,6 +60,7 @@ class Program
                     Console.WriteLine($"Skipping {path}: {ex.Message}");
                 }
             }
+            Console.WriteLine($"Created {zipPath} with {batches[i].Count} files.");
         });
          
         Console.WriteLine($"Created {batches.Count} zips.");
