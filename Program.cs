@@ -1,20 +1,65 @@
 ﻿using System.IO.Compression;
- 
+
 class Program
 {
-    const long LIMIT = 1L * 1024 * 1024 * 1024; // 1 GB
-    //                long   KB     MB     GB. 
-    private static void Main()
+    private static void Main(string[] args)
     {
-        Console.WriteLine("Enter the source directory:");
-        string srcDir = Console.ReadLine() ?? "";
-        string outDir = Path.Combine(srcDir, "zips");
+        // Help check.
+        if (args.Contains("--help") || args.Contains("-h"))
+        {
+            Console.WriteLine("""
+            Usage:
+            Compressor inputfile <path> [options] <input>
+
+            Options:
+                --output <path>     Where zipped files will be stored.
+                --size <number>     Target size of output, individual files larger than that will be zipped solo.
+                -h, --help          Show this screen.
+            """);
+            return;
+        }
+        // Source Directory check and creation.
+        if (args.Length < 1) 
+        {
+            Console.WriteLine("Not enought arguments provided.");
+            return;
+        }
+        string srcDir = args[0];
         if (!Directory.Exists(srcDir))
         {
-            Console.WriteLine("Source directory doesn't exist.");
-            Environment.Exit(1);
+            Console.WriteLine("Sorce Directory doesn't exist!");
+            return;
         }
-        Directory.CreateDirectory(outDir);
+        // Out Directory check and creation.
+        int outIndex = args.IndexOf("--output")+1;
+        string outDir;
+        if (outIndex > 1) // 0 will always be source and 1 is flag.
+        {
+            if (outIndex < args.Length)
+            {
+                outDir = args[outIndex];
+            } else
+            {
+                Console.WriteLine("Bad output argument.");
+                return;
+            }
+            Directory.CreateDirectory(outDir);
+        } else
+        {
+            outDir = Path.Combine(srcDir, @"zip\");
+            if (!Directory.Exists(outDir)) Directory.CreateDirectory(outDir);
+        }
+        // Size check and creation.
+        outIndex = args.IndexOf("--size")+1;
+        long? limit = null;
+        if (outIndex > 0 &&
+            outIndex < args.Length &&
+            long.TryParse(args[outIndex], out long parsedLimit))
+        {
+            limit = parsedLimit * 1024 * 1024 * 1024 ;
+        //            long          KB     MB     GB. 
+        }
+        limit ??= 1L * 1024 * 1024 * 1024; // 1 GB
 
         // 1. Plan batches by uncompressed size
         string[] files = Directory.GetFiles(srcDir);
@@ -25,7 +70,7 @@ class Program
         foreach (string path in files)
         {
             long size = new FileInfo(path).Length;
-            if (currentBatch.Count > 0 && current + size > LIMIT)
+            if (currentBatch.Count > 0 && current + size > limit)
             {
                 batches.Add(currentBatch);
                 currentBatch = [];
